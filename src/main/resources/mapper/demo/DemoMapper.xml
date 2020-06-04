@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.hobby.system.demo.mapper.DemoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gogo.hobby.system.demo.model.Demo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+                s.id,
+                s.name,
+                s.sex
+        </sql>
+    
+    <cache-ref namespace="com.gogo.hobby.system.demo.mapper.DemoMapper"/>
+
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_demo s
+        <where>
+            1 = 1
+            <if test="et.name != null and ''!= et.name">
+                and s.name = #{et.name}
+            </if>
+            <if test="et.sex != null and ''!= et.sex">
+                and s.sex = #{et.sex}
+            </if>
+        </where>
+    </select>
+
+</mapper>
