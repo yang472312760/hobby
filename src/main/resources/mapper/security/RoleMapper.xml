@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.hobby.system.security.mapper.IRoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gogo.hobby.system.security.entity.Role">
+        <result column="creator"                  property="creator"/>
+        <result column="modifier"                 property="modifier"/>
+        <result column="locking"                  property="locking"/>
+        <result column="id"                       property="id"/>
+        <result column="role_name"                property="roleName"/>
+        <result column="description"              property="description"/>
+        <result column="authority"                property="authority"/>
+        <result column="role_type"                property="roleType"/>
+        <result column="order_num"                 property="orderNum"/>
+        <result column="creator_id"                property="creatorId"/>
+        <result column="create_time"               property="createTime"/>
+        <result column="modifier_id"               property="modifierId"/>
+        <result column="modifyTime"               property="modifyTime"/>
+        <result column="is_delete"                 property="isDelete"/>
+        <result column="is_temp"                   property="isTemp"/>
+        <result column="locking_modify_time"      property="lockingModifyTime"/>
+        <result column="sys_id"                    property="sysId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        creator,            modifier,           locking,            id,
+        role_name,          description,        authority,          role_type,
+        order_num,          creator_id,         create_time,        modifier_id,
+        modify_time,        is_delete,          is_temp,            locking_modify_time,
+        sys_id
+    </sql>
+
+    <select id="getRolesByUserTokenId" parameterType="integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role s
+        left JOIN sys_user_role sur on sur.role_id = s.id
+        where sur.user_id= #{userId}
+    </select>
+
+    <select id="getListByUserTokenId" parameterType="integer" resultType="com.gogo.hobby.system.security.entity.RoleToken">
+        select s.id,s.authority
+        from sys_role s
+        left JOIN sys_user_role sur on sur.role_id = s.id
+        where sur.user_id= #{userId}
+    </select>
+
+</mapper>

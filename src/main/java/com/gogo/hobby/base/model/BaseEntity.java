@@ -2,6 +2,7 @@ package com.gogo.hobby.base.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
@@ -83,5 +84,13 @@ public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "系统ID")
     @TableField("sys_id")
     private Integer sysId;
+
+    @Version
+    @TableField("locking")
+    private Integer locking;
+
+    @JsonIgnore
+    @TableField("locking_modify_time")
+    private Date lockingModifyTime;
 
 }

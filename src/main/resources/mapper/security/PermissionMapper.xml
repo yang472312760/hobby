@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.hobby.system.security.mapper.IPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gogo.hobby.system.security.entity.Permission">
+        <id column="id"                                     property="id"/>
+        <result column="creator_id"                         property="creatorId"/>
+        <result column="creator"                            property="creator"/>
+        <result column="create_time"                        property="createTime"/>
+        <result column="modifier_id"                        property="modifierId"/>
+        <result column="modifier"                           property="modifier"/>
+        <result column="modify_time"                        property="modifyTime"/>
+        <result column="is_delete"                          property="isDelete"/>
+        <result column="is_temp"                            property="isTemp"/>
+        <result column="locking"                            property="locking"/>
+        <result column="locking_modify_time"                property="lockingModifyTime"/>
+        <result column="sys_id"                             property="sysId"/>
+        <result column="permission_name"                    property="permissionName"/>
+        <result column="permission_type"                    property="permissionType"/>
+        <result column="url"                                property="url"/>
+        <result column="parent_id"                          property="parentId"/>
+        <result column="order_num"                          property="orderNum"/>
+        <result column="target"                             property="target"/>
+        <result column="permission"                         property="permission"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        s.creator_id,         s.creator,                s.create_time,      s.modifier_id,
+        s.modifier,           s.modify_time,            s.is_delete,        s.is_temp,
+        s.locking, s.locking_modify_time,    s.sys_id,           s.id,
+        s.permission_name,    s.permission_type,        s.url,              s.parent_id,
+        s.order_num,          s.target,                 s.permission
+    </sql>
+
+    <select id="getListByRoleId" resultMap="BaseResultMap" resultType="com.gogo.hobby.system.security.entity.Permission">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission s
+        LEFT JOIN sys_role_permission srp on srp.permission_id = s.id
+        where srp.role_id = #{roleId}
+    </select>
+
+    <select id="getPermissionsByRoleId" resultType="com.gogo.hobby.system.security.entity.PermissionToken"
+            parameterType="int">
+        select s.id,s.target,s.permission from sys_permission s
+        LEFT JOIN sys_role_permission srp on srp.permission_id = s.id
+        where srp.role_id = #{roleId}
+    </select>
+
+</mapper>

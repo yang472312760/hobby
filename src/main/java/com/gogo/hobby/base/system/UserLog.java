@@ -108,49 +108,6 @@ public class UserLog {
     private String methodName;
 
 
-
-    /**
-     * <p>
-     * Description: 数据场
-     * </p>
-     */
-    private String datafield;
-
-    /**
-     * <p>
-     * Description: 数据场描述
-     * </p>
-     */
-    private String datafieldDesc;
-
-    /**
-     * <p>
-     * Description: 数据ID
-     * </p>
-     */
-    private String dataId;
-
-    /**
-     * <p>
-     * Description: 数据类型
-     * </p>
-     */
-    private int dataType;
-
-    /**
-     * <p>
-     * Description: 新值
-     * </p>
-     */
-    private String newValue;
-
-    /**
-     * <p>
-     * Description: 旧值
-     * </p>
-     */
-    private String oldValue;
-
     /**
      * <p>
      * Description: 操作时间

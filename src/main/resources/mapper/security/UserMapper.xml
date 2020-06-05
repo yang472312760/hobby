@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogo.hobby.system.security.mapper.IUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.gogo.hobby.system.security.entity.User">
+        <id     column="id"                                property="id" />
+        <result column="name"                              property="name" />
+        <result column="user_name"                         property="userName" />
+        <result column="password"                          property="password" />
+        <result column="hand_image_url"                    property="handImageUrl" />
+        <result column="gender"                            property="gender" />
+        <result column="age"                               property="age" />
+        <result column="email"                             property="email" />
+        <result column="is_account_non_expired"            property="isAccountNonExpired" />
+        <result column="is_account_non_locked"             property="isAccountNonLocked" />
+        <result column="is_credentials_non_expired"        property="isCredentialsNonExpired" />
+        <result column="is_enabled"                        property="isEnabled" />
+        <result column="is_remember_me"                    property="isRememberMe" />
+        <result column="creator"                           property="creator" />
+        <result column="creator_id"                        property="creatorId" />
+        <result column="create_time"                       property="createTime" />
+        <result column="modifier"                          property="modifier" />
+        <result column="modifier_id"                       property="modifierId" />
+        <result column="modify_time"                       property="modifyTime" />
+        <result column="is_delete"                         property="isDelete" />
+        <result column="is_temp"                           property="isTemp" />
+        <result column="locking"                           property="locking" />
+        <result column="locking_modify_time"               property="lockingModifyTime" />
+        <result column="sys_id"                            property="sysId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        s.creator,                s.modifier,                     s.locking,                s.id,
+        s.name,                   s.user_name,                    s.password,               s.hand_image_url,
+        s.gender,                 s.age,                          s.email,                  s.is_account_non_expired,
+        s.is_account_non_locked,  s.is_credentials_non_expired,   s.is_enabled,             s.is_remember_me,
+        s.creator_id,             s.create_time,                  s.modifier_id,            s.modify_time,
+        s.is_delete,              s.is_temp,                      s.locking_modify_time,    s.sys_id
+    </sql>
+
+    <select id="getUserByLoginName" resultType="com.gogo.hobby.system.security.entity.User"
+            parameterType="com.gogo.hobby.system.security.entity.User">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user s
+        <where>
+            1 = 1
+            <if test="username != null">
+                and s.user_name = #{username}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUserByUserName" resultType="com.gogo.hobby.system.security.entity.UserToken"
+            parameterType="com.gogo.hobby.system.security.entity.UserToken">
+        select
+        s.id,s.user_name,s.password,s.is_account_non_expired,s.is_account_non_locked,s.is_credentials_non_expired,s.is_enabled,
+        s.is_remember_me
+        from sys_user s
+        <where>
+            1 = 1
+            <if test="username != null">
+                and s.user_name = #{username}
+            </if>
+        </where>
+    </select>
+
+</mapper>
