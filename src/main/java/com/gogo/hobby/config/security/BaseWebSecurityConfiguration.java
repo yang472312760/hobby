@@ -32,6 +32,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * <p>
  * Date: 2019年7月31日
  * </p>
+ * @author Administrator
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
@@ -92,7 +93,7 @@ public class BaseWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JsonWebTokenAuthorizationFilter(authenticationManager())).formLogin()
                 .loginProcessingUrl("/login").successHandler(this.authenticationSuccessHandler)
                 .failureHandler(this.authenticationFailureHandler).permitAll().and().logout()
-                .deleteCookies("e-matrix-dimension").clearAuthentication(true)
+                .deleteCookies("hobby").clearAuthentication(true)
                 .logoutSuccessHandler(this.logoutSuccessHandler).permitAll().and().exceptionHandling()
                 .accessDeniedHandler(this.accessDeniedHandler).and().cors();
     }

@@ -28,6 +28,7 @@ import org.springframework.stereotype.Component;
  * <p>
  * Date: 2019年7月31日
  * </p>
+ * @author Administrator
  */
 @Component
 public class BasePermissionEvaluator implements PermissionEvaluator {

@@ -17,6 +17,7 @@ import com.gogo.hobby.system.demo.model.Demo;
 import com.gogo.hobby.system.demo.service.DemoService;
 import com.gogo.hobby.system.demo.mapper.DemoMapper;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -82,6 +83,7 @@ public class DemoController {
      * @param demo 查询条件
      * @return Result 分页数据
      */
+    @PreAuthorize("hasRole('admin') or hasPermission('demo','select')")
     @SystemLog(logType = LogType.BUSINESSLOG, operateType = OperateType.SELECT, valueIsTemplate = true, logContent = "分页查询,结果${param2.success?string(\"成功\", \"失败\")}")
     @ApiOperation(value = "分页查询", notes = "分页查询")
     @GetMapping("/page")
